@@ -31,7 +31,6 @@ export function Header() {
             <LandPlot className="mr-1" />
             Esal
           </Link>
-
           <div className="flex md:hidden">
             <LandPlot />
             <Link to={pathKeys.home()} className="font-bold text-xl">

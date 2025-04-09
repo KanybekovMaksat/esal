@@ -53,7 +53,7 @@ export function ArticlesList() {
   // }
 
   return (
-    <div className="flex flex-wrap justify-between gap-5 ">
+    <div className="flex flex-wrap justify-center gap-5 ">
       {placesData?.data.map((article) => (
         <ArticleCard article={article} key={article.id} />
       ))}
