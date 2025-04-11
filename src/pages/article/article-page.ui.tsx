@@ -24,6 +24,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/app/components/ui/breadcrumb';
+import { CommentForm } from '@/widgets/comment-form';
+import { CommentList } from '@/widgets/comment-list';
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -70,7 +72,7 @@ function Page() {
   const {
     name,
     description,
-    id: articleId,
+    id: placeId,
     photo,
     category,
     rating,
@@ -233,6 +235,11 @@ function Page() {
 
           </div>
             <ShareButton />
+        </div>
+        <div className="max-w-full md:max-w-[95%] bg-[white]  py-5 ">
+          <h3 className="font-bold text-2xl">Комментарии</h3>
+          <CommentForm id={parseInt(placeId)} />
+          <CommentList id={parseInt(placeId)} />
         </div>
       </Container>
     </div>

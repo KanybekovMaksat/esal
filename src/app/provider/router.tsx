@@ -10,14 +10,13 @@ import { profilePageRoute } from '../../pages/profile';
 import { GenericLayout } from '../../pages/layout';
 import { aboutPageRoute } from '~pages/about';
 import { getCookie } from 'typescript-cookie';
-import { loyaltyPageRoute } from '~pages/loyalty';
+
 import { loginPageRoute } from '~pages/login';
 import { registerPageRoute } from '~pages/register';
 import { verifyPageRoute } from '~pages/verify';
 import { favoritePageRoute } from '~pages/favorite';
 import { termsPageRoute } from '~pages/terms';
 import { policyPageRoute } from '~pages/policy';
-import { cartPageRoute } from './../../pages/cart/cart-page.route';
 import { categoryPageRoute } from '~pages/category/catalog-page.route';
 import { articlePageRoute } from '@/pages/article';
 import { Button } from '../components/ui/button';
@@ -89,14 +88,12 @@ const router = createBrowserRouter([
       aboutPageRoute,
       articlePageRoute,
       aboutPageRoute,
-      loyaltyPageRoute,
       policyPageRoute,
       loginPageRoute,
       verifyPageRoute,
       termsPageRoute,
       registerPageRoute,
       favoritePageRoute,
-      cartPageRoute,
     ],
   },
 ]);

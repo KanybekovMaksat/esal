@@ -59,7 +59,7 @@ export function ArticlesList() {
       ))}
       <Link
         className="flex justify-end underline text-pc-500 my-3"
-        to='/category'
+        to="/category"
       >
         Смотреть больше
         <NavigateNextIcon />
@@ -79,39 +79,38 @@ function ArticleCard(props: ArticleCardProps) {
   return (
     <div
       key={props.article.id}
-      className="w-[350px] py-2 gap-2 hover:cursor-pointer justify-start p-[10px] rounded-md shadow-lg bg-white text-gray-800 hover:shadow-lg transition duration-200 " 
+      className="w-[350px] py-2 gap-2 hover:cursor-pointer justify-start p-[10px] rounded-md shadow-lg bg-white text-gray-800 hover:shadow-lg transition duration-200 "
     >
       <div onClick={() => handleNavigate(props.article.id)}>
-      <div className="relative w-full h-[200px] flex justify-center">
-        <img
-          src={props.article.photo}
-          className="rounded-md h-[200px] object-cover w-full"
-          alt={props.article.name}
-        />
-        <div className="absolute top-0 left-0 w-full flex items-center px-1 justify-between backdrop-blur-md bg-white/50 py-1 rounded-t-md">
-          <div className="flex gap-1 items-center text-[14px]">
-            <VisibilityIcon className="w-4 text-gray-600" />
-            {props.article.viewCount}
-          </div>
-          <StyledRating
-            size="small"
-            name="half-rating-read"
-            defaultValue={props.article.rating}
-            precision={0.5}
-            readOnly
-            className="p-1 rounded-md"
+        <div className="relative w-full h-[200px] flex justify-center">
+          <img
+            src={props.article.photo}
+            className="rounded-md h-[200px] object-cover w-full"
+            alt={props.article.name}
           />
+          <div className="absolute top-0 left-0 w-full flex items-center px-1 justify-between backdrop-blur-md bg-white/50 py-1 rounded-t-md">
+            <div className="flex gap-1 items-center text-[14px]">
+              <VisibilityIcon className="w-4 text-gray-600" />
+              {props.article.viewCount}
+            </div>
+            <StyledRating
+              size="small"
+              name="half-rating-read"
+              defaultValue={props.article.rating}
+              precision={0.5}
+              readOnly
+              className="p-1 rounded-md"
+            />
+          </div>
         </div>
-      </div>
-      <div className="h-[90px]">
-        <h3 className="font-bold text-black/70 text-md leading-[120%] py-1">
-          {props.article.name}
-        </h3>
-        <p className="text-[14px] leading-[120%] text-left opacity-70 line-clamp-2">
-          {props.article.description}
-        </p>
-      </div>
-
+        <div className="h-[90px]">
+          <h3 className="font-bold text-black/70 text-md leading-[120%] py-1">
+            {props.article.name}
+          </h3>
+          <p className="text-[14px] leading-[120%] text-left opacity-70 line-clamp-2">
+            {props.article.description}
+          </p>
+        </div>
       </div>
       <div className="py-1 flex items-center justify-between border-t border-gray-200">
         <div className="flex gap-2">
