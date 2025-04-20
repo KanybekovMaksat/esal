@@ -9,6 +9,7 @@ import {
   favoriteArticleQuery,
   getArticleDetailsQuery,
   getArticleQuery,
+  getEvents,
   getFavoriteArticles,
   likeArticleQuery,
   updateViewQuery,
@@ -47,6 +48,7 @@ const keys = {
   viewArticle: (id: number) => [...keys.root(), 'view', id] as const,
   favArticle: (id: number) => [...keys.root(), 'favorite', id] as const,
   likeArticle: (id: number) => [...keys.root(), 'like', id] as const,
+  getEvents: () => [...keys.root(), 'events'] as const,
 };
 
 export const articleService = {
@@ -93,6 +95,12 @@ export function useGetFavoriteArticles() {
   return useQuery({
     queryKey: keys.getFavArticle(),
     queryFn: getFavoriteArticles,
+  });
+}
+export function useGetEvents() {
+  return useQuery({
+    queryKey: keys.getEvents(),
+    queryFn: getEvents,
   });
 }
 

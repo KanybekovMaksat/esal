@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  overflow: visible !important;
+  position: relative !important;
+}
 .category-swiper .swiper-pagination-bullet {
   width: 15px;
   height: 6px;

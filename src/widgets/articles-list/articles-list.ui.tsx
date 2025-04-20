@@ -42,21 +42,13 @@ export function ArticlesList() {
     return <div className="my-20">Error fetching user data.</div>;
   }
 
-  // const articles = articleData?.data?.results;
 
-  // if (articles.length == 0) {
-  //   return (
-  //     <div className="text-center font-medium">
-  //       К сожалению, у вас нет избранных статей📖
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="flex flex-wrap justify-center gap-5 ">
-      {placesData?.data.map((article) => (
-        <ArticleCard article={article} key={article.id} />
-      ))}
+    {placesData?.data.map((article) => (
+      <ArticleCard article={article} key={article.id} />
+    ))}
       <Link
         className="flex justify-end underline text-pc-500 my-3"
         to="/category"
@@ -93,6 +85,8 @@ function ArticleCard(props: ArticleCardProps) {
               <VisibilityIcon className="w-4 text-gray-600" />
               {props.article.viewCount}
             </div>
+            <div className='flex items-center'>
+           <p className='font-bold text-xs'> {props.article.rating}</p>
             <StyledRating
               size="small"
               name="half-rating-read"
@@ -101,6 +95,7 @@ function ArticleCard(props: ArticleCardProps) {
               readOnly
               className="p-1 rounded-md"
             />
+            </div>
           </div>
         </div>
         <div className="h-[90px]">

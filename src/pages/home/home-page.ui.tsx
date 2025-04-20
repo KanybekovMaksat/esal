@@ -1,6 +1,8 @@
 import { ArticlesList } from '~widgets/articles-list';
 import { Container } from '@mui/material';
 import { IntroBlock } from '~widgets/intro-block';
+import { EventCard } from '@/widgets/event-card/event-card.ui';
+import { EventList } from '@/widgets/event-list';
 
 export function HomePage() {
   return (
@@ -16,7 +18,14 @@ export function HomePage() {
         Популярные места
       </h2>
       <IntroBlock />
+      <h2 className="mt-10 mb-5 text-center text-2xl font-bold text-pc-500">
+        Места для отдыха и развлечений
+      </h2>
       <ArticlesList />
+      <h2 className="mt-10 mb-5 text-center text-2xl font-bold text-pc-500">
+        Ближайшие события
+      </h2>
+      <EventList />
     </Container>
   );
 }

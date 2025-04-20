@@ -35,7 +35,6 @@ function App() {
             />
             <BrowserRouter />
           </ThemeProvider>
-
           </ShadProvider>
         </StyledEngineProvider>
       </TanStackQueryClientProvider>

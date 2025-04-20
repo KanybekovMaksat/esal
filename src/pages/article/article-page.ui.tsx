@@ -39,7 +39,7 @@ const StyledRating = styled(Rating)({
 function Page() {
   const { id } = useParams();
   const [preLoad, setPreLoad] = useState(true);
-
+  articleQueries.useUpdateArticleView(Number(id));
   useEffect(() => {
     setPreLoad(false);
   }, []);

@@ -19,7 +19,7 @@ export function getArticleDetailsQuery(id: number) {
 }
 
 export function updateViewQuery(id: number) {
-  return axios.get(`${API_URL}articles/update-view/${id}`);
+  return axios.get(`${API_URL}update-view/${id}`);
 }
 
 export function getFavoriteArticles() {
@@ -30,11 +30,11 @@ export function likeArticleQuery(id: number) {
   return $api.get(`like/${id}`);
 }
 
+export function getEvents(){
+  return axios.get(`${API_URL}events/`)
+}
 
 
-// export function createBox(params: { box: CreateBox }) {
-//   return $api.post(`articles/boxs/me/`, params.box);
-// }
 
 export function editArticle(props: any = {}) {
   const { data } = props;
@@ -59,11 +59,6 @@ export function favoriteArticleQuery(id: number) {
   return $api.get(`users/favorite/${id}/`);
 }
 
-
-
-// export function createArticleMutation(params: { article: CreateArticleDto }) {
-//   return $api.post(`articles/`, params.article);
-// }
 
 
 
