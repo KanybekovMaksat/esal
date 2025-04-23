@@ -1,4 +1,4 @@
-import { CircularProgress, Rating, styled } from '@mui/material';
+import { CircularProgress, Rating, styled, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { useState } from 'react';
 
 
 const StyledRating = styled(Rating)({
@@ -31,11 +32,16 @@ const StyledRating = styled(Rating)({
 dayjs.locale('ru');
 
 export function ArticlesList() {
+  const [searchQuery, setSearchQuery] = useState('');
   const {
     data: placesData,
     isLoading: isPlacesLoading,
     isError: isPlacesError,
   } = productQueries.useGetPlace();
+
+  const filteredArticles = placesData?.data.filter((article) =>
+    article.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (isPlacesLoading) {
     return (
@@ -47,14 +53,30 @@ export function ArticlesList() {
   }
 
   if (isPlacesError) {
-    return <div className="my-20">Error fetching user data.</div>;
+    return <div className="my-20 text-center">Ошибка при получении данных.</div>;
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-5 ">
-    {placesData?.data.map((article) => (
-      <ArticleCard article={article} key={article.id} />
-    ))}
+    <div className="flex flex-col items-center gap-5 px-4">
+      <TextField
+        label="Поиск"
+        variant="outlined"
+        fullWidth
+        className="w-full mb-4"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
+      <div className="flex flex-wrap justify-center gap-5">
+        {filteredArticles?.length > 0 ? (
+          filteredArticles.map((article) => (
+            <ArticleCard article={article} key={article.id} />
+          ))
+        ) : (
+          <p className="text-center">Ничего не найдено</p>
+        )}
+      </div>
+
       <Link
         className="flex justify-end underline text-pc-500 my-3"
         to="/category"
@@ -65,7 +87,6 @@ export function ArticlesList() {
     </div>
   );
 }
-
 type ArticleCardProps = { article: articleTypes.Article };
 
 function ArticleCard(props: ArticleCardProps) {
