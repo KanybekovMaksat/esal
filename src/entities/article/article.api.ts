@@ -14,6 +14,10 @@ export function getArticleQuery() {
   return axios.get<ArticlesList>(`${API_URL}articles/`);
 }
 
+export function getPopular() {
+  return axios.get<ArticlesList>(`${API_URL}places/?ordering=-view_count`);
+}
+
 export function getArticleDetailsQuery(id: number) {
   return axios.get<Article>(`${API_URL}places/${id}/`);
 }
@@ -33,8 +37,6 @@ export function likeArticleQuery(id: number) {
 export function getEvents(){
   return axios.get(`${API_URL}events/`)
 }
-
-
 
 export function editArticle(props: any = {}) {
   const { data } = props;

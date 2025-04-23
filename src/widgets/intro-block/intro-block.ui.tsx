@@ -4,6 +4,8 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { articleQueries } from '@/entities/article';
+import { Link } from 'react-router-dom';
 
 interface ICard {
   image: string;
@@ -39,19 +41,25 @@ const cards: ICard[] = [
   },
 ];
 
-function CardItem({ image, title, description }) {
+function CardItem({ photo, name }) {
   return (
-    <div className="min-h-[250px] max-h-[250px] min-w-[350px] max-w-[350px] p-3 py-4 hover:text-second-100 bg-[white] border-2 border-[#ccccccbc] duration-300 hover:border-pc-200 rounded-md">
-      <img src={image} alt={title} className="rounded max-h-[140px] min-w-full object-cover object-center mx-auto" />
-      <h3 className="text-sm md:text-lg font-semibold my-1 text-center">{title}</h3>
-      <p className="text-xs  md:font-medium text-center md:text-left">
-        {description}
+    <div className="min-h-[220px] max-h-[220px] min-w-[350px] max-w-[350px] p-3 py-4 hover:text-second-100 bg-[white] border-2 border-[#ccccccbc] duration-300 hover:border-pc-200 rounded-md">
+      <img src={photo} alt={name} className="rounded max-h-[140px] min-w-full object-cover object-center mx-auto" />
+
+      <p className="text-sm line-clamp-1 mt-2  md:font-medium text-center">
+        {name}
       </p>
     </div>
   );
 }
 
 export function IntroBlock() {
+    const {
+      data: placesData,
+      isLoading: isPlacesLoading,
+      isError: isPlacesError,
+    } = articleQueries.useGetPopular();
+
   return (
     <div className="">
       <div className="flex slider-banner">
@@ -75,9 +83,11 @@ export function IntroBlock() {
           className='category-swiper'
           pagination={{ clickable: true }}
         >
-          {cards.map((card, index) => (
+          {placesData?.data.slice(0,6).map((card, index) => (
             <SwiperSlide key={index}>
+              <Link to={`/places/${card.id}`} className="flex justify-center items-center">
               <CardItem {...card} />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

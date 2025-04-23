@@ -26,6 +26,12 @@ import {
 } from '@/app/components/ui/breadcrumb';
 import { CommentForm } from '@/widgets/comment-form';
 import { CommentList } from '@/widgets/comment-list';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -50,7 +56,7 @@ function Page() {
     isError,
   } = articleQueries.useGetArticleDetail(parseInt(id));
 
-  // articleQueries.useUpdateArticleView(Number(id));
+  articleQueries.useUpdateArticleView(Number(id));
 
   if (isLoading) {
     return (
@@ -84,7 +90,7 @@ function Page() {
     tiktok,
     viewCount,
     likeCount,
-    likes
+    likes,
   } = articleData.data;
 
   return (
@@ -108,12 +114,35 @@ function Page() {
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-800 mt-6 mb-2">{name}</h1>
           <div className="relative w-full h-[300px] ">
-            <img
-              src={photo}
-              alt={name}
-              className="w-full h-[300px] object-cover rounded-lg "
-            />
-            <div className="absolute top-0 left-0 w-full flex items-center px-1 justify-between backdrop-blur-md bg-white/50 py-1 rounded-t-md">
+            {articleData.data.images.length === 0 ? (
+              <img
+                src={photo}
+                alt={name}
+                className="w-full h-[300px] object-cover rounded-lg "
+              />
+            ) : (
+              <Swiper
+                modules={[Pagination, Autoplay]}
+                slidesPerView={1}
+                autoplay={{
+                  delay: 2000,
+                  disableOnInteraction: false,
+                }}
+                className="category-swiper"
+                pagination={{ clickable: true }}
+              >
+                {articleData.data.images.map((imgObj, index) => (
+                  <SwiperSlide key={index}>
+                    <img
+                      src={imgObj.image}
+                      alt={`image-${index}`}
+                      className="w-full h-[300px] object-cover rounded-lg"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
+            <div className="absolute top-0 left-0 z-50 w-full flex items-center px-1 justify-between backdrop-blur-md bg-white/50 py-1 rounded-t-md">
               <div className="flex gap-1 items-center text-[14px]">
                 <Eye className="w-4 text-gray-600" />
                 {viewCount}
@@ -129,7 +158,7 @@ function Page() {
             </div>
             <Button
               variant="outline"
-              className="absolute bottom-2 left-2 bg-white rounded-md shadow-md hover:bg-gray-100"
+              className="absolute bottom-2 left-2 z-50 bg-white rounded-md shadow-md hover:bg-gray-100"
             >
               <div className="flex items-center space-x-2">
                 <img
@@ -232,9 +261,8 @@ function Page() {
               }}
             />
             <FavoriteButton id={id} />
-
           </div>
-            <ShareButton />
+          <ShareButton />
         </div>
         <div className="max-w-full md:max-w-[95%] bg-[white]  py-5 ">
           <h3 className="font-bold text-2xl">Комментарии</h3>

@@ -11,6 +11,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { productQueries } from '@/entities/product';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
+
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
     color: '#000000',
@@ -41,8 +49,6 @@ export function ArticlesList() {
   if (isPlacesError) {
     return <div className="my-20">Error fetching user data.</div>;
   }
-
-
 
   return (
     <div className="flex flex-wrap justify-center gap-5 ">

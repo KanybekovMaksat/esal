@@ -11,6 +11,7 @@ import {
   getArticleQuery,
   getEvents,
   getFavoriteArticles,
+  getPopular,
   likeArticleQuery,
   updateViewQuery,
 } from './article.api';
@@ -49,6 +50,7 @@ const keys = {
   favArticle: (id: number) => [...keys.root(), 'favorite', id] as const,
   likeArticle: (id: number) => [...keys.root(), 'like', id] as const,
   getEvents: () => [...keys.root(), 'events'] as const,
+  getPopular: () => [...keys.root(), 'popular'] as const,
 };
 
 export const articleService = {
@@ -84,10 +86,10 @@ export const articleService = {
     queryClient.ensureQueryData(articleService.queryOptions(id)),
 };
 
-export function useGetArticles() {
+export function useGetPopular() {
   return useQuery({
-    queryKey: keys.root(),
-    queryFn: getArticleQuery,
+    queryKey: keys.getPopular(),
+    queryFn: getPopular,
   });
 }
 
